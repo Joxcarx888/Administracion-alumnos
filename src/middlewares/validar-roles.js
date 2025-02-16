@@ -7,13 +7,13 @@ export const tieneRole = (...roles) => {
             })
         }
 
-        if(!roles.includes(req.usuario.role)){
-            return res.status(401).json({
+        if (!roles.includes(req.usuario.role)) {
+            return res.status(403).json({
                 success: false,
-                msg: `Usuario no autoizado, posee un rol ${req.usuario.role}, los roles autorizados son ${roles}`
-            })
-
+                msg: `Acceso denegado. Este recurso requiere uno de los siguientes roles: ${roles.join(', ')}`
+            });
         }
+        
 
         next();
     }

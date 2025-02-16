@@ -1,61 +1,66 @@
 import { Schema, model } from "mongoose";
+import bcrypt from "bcryptjs";
 
-const UserSchema = new Schema({
+const UserSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: [true, "Name is required"],
-        maxLength: [35, "Can't exceed 35 characters"]
+      type: String,
+      required: [true, "Name is required"],
+      maxLength: [35, "Can't exceed 35 characters"],
+      trim: true,
     },
     username: {
-        type: String,
-        unique: true,
-        required: true
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
     },
     email: {
-        type: String,
-        required: [true, "Email is required"],
-        unique: true
+      type: String,
+      required: [true, "Email is required"],
+      unique: true,
+      lowercase: true,
+      trim: true,
     },
     password: {
-        type: String,
-        required: [true, "Password required"],
-        minLength: 8
+      type: String,
+      required: [true, "Password required"],
+      minLength: 8,
     },
     role: {
-        type: String,
-        enum: ["TEACHER_ROLE", "STUDENT_ROLE"],
-        default: "STUDENT_ROLE"  
+      type: String,
+      enum: ["TEACHER_ROLE", "STUDENT_ROLE"],
+      default: "STUDENT_ROLE",
     },
-    studentInfo: {
-        courses: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Course"
-            }
-        ]
-    },
-    teacherInfo: {
-        coursesCreated: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Course"
-            }
-        ]
-    },
+    courses: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
+    coursesCreated: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
     estado: {
-        type: Boolean,
-        default: true
-    }
-},
-{
+      type: Boolean,
+      default: true,
+    },
+  },
+  {
     timestamps: true,
-    versionKey: false
-});
+    versionKey: false,
+  }
+);
 
+
+// Ocultar campos sensibles
 UserSchema.methods.toJSON = function () {
-    const { __v, password, _id, ...usuario } = this.toObject();
-    usuario.uid = _id;
-    return usuario;
-}
+  const { __v, password, _id, ...usuario } = this.toObject();
+  usuario.uid = _id;
+  return usuario;
+};
 
 export default model("User", UserSchema);

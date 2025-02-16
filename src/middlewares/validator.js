@@ -2,30 +2,51 @@ import { body } from "express-validator";
 import { validarCampos } from "./validar-campos.js";
 import { existenteEmail, esRoleValido } from "../helpers/db-validator.js";
 
-
 export const studentRegisterValidator = [
-    body("name", "The name is required").not().isEmpty(),
-    body("email", "You must enter a valid email").not().isEmpty().isEmail(),
+    body("name", "El nombre es obligatorio").not().isEmpty(),
+    body("email", "Debe ingresar un correo válido").not().isEmpty().isEmail(),
     body("email").custom(existenteEmail),
-    body("password", "Password must be at least 8 characters").isLength({ min: 8 }),
-    body("role").default("STUDENT_ROLE"), 
-    body("studentInfo.courses").optional().isArray().withMessage("Courses must be an array"),
+    body("password", "La contraseña debe tener al menos 8 caracteres").isLength({ min: 8 }),
+
+    body("role").custom((value, { req }) => {
+        if (value && value !== "STUDENT_ROLE") {
+            throw new Error("Los estudiantes solo pueden registrarse con el rol STUDENT_ROLE");
+        }
+        return true;
+    }),
+
+    body("studentInfo.courses").optional().isArray().withMessage("Los cursos deben estar en un array"),
     validarCampos
 ];
 
 export const teacherRegisterValidator = [
-    body("name", "The name is required").not().isEmpty(),
-    body("email", "You must enter a valid email").not().isEmpty().isEmail(),
-    body("email").custom(existenteEmail),
-    body("password", "Password must be at least 8 characters").isLength({ min: 8 }),
-    body("role").custom(esRoleValido), 
-    body("teacherInfo.coursesCreated").optional().isArray().withMessage("Courses must be an array"),
+    body("name", "El nombre es obligatorio").not().isEmpty(),
+    body("email", "Debe ingresar un correo válido").not().isEmpty().isEmail(),
+    body("email").custom(existenteEmail), 
+    body("password", "La contraseña debe tener al menos 8 caracteres").isLength({ min: 8 }),
+
+    body("role").custom((value, { req }) => {
+        if (value !== "TEACHER_ROLE") {
+            throw new Error("Los profesores deben registrarse con el rol TEACHER_ROLE");
+        }
+        return true;
+    }),
+
+    body("teacherInfo.coursesCreated").optional().isArray().withMessage("Los cursos deben estar en un array"),
     validarCampos
 ];
 
 export const loginValidator = [
-    body("email").optional().isEmail().withMessage("Enter a valid email address"),
-    body("username").optional().isString().withMessage("Enter a valid username"),
-    body("password", "password must be at least 8 characters").isLength({min: 8}),
+    body("email").optional().isEmail().withMessage("Ingrese un correo válido"),
+    body("username").optional().isString().withMessage("Ingrese un nombre de usuario válido"),
+    body("password", "La contraseña debe tener al menos 8 caracteres").isLength({ min: 8 }),
+
+    body().custom((value, { req }) => {
+        if (!req.body.email && !req.body.username) {
+            throw new Error("Debe proporcionar un correo electrónico o un nombre de usuario");
+        }
+        return true;
+    }),
+    
     validarCampos
-]
+];

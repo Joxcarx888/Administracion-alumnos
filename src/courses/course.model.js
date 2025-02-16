@@ -1,36 +1,48 @@
 import { Schema, model } from "mongoose";
 
-const CourseSchema = new Schema({
-    title: {
+const CourseSchema = new Schema(
+    {
+      title: {
         type: String,
-        required: [true, "Title is required"],
-        maxLength: [100, "Title can't exceed 100 characters"]
-    },
-    description: {
+        required: [true, "Título es requerido"],
+        maxLength: [100, "No más de 100 caracteres"],
+        minLength: [5, "Mínimo 5 caracteres"],
+        trim: true,
+      },
+      description: {
         type: String,
-        required: [true, "Description is required"],
-        maxLength: [500, "Description can't exceed 500 characters"]
-    },
-    status:{
+        required: [true, "Descripción es requerida"],
+        maxLength: [500, "No más de 500 caracteres"],
+        minLength: [10, "Mínimo 10 caracteres"],
+        trim: true,
+      },
+      status: {
         type: Boolean,
-        default: true
-    },
-    teacher: {
+        default: true,
+      },
+      teacher: {
         type: Schema.Types.ObjectId,
         ref: "User",
-        required: [true, "Teacher is required"]
-    },
-    students: [
+        required: [true, "Maestro requerido"],
+      },
+      students: [
         {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        }
-    ]
-}, {
-    timestamps: true,
-    versionKey: false
-});
-
-
-
-export default model("Course", CourseSchema);
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
+    },
+    {
+      timestamps: true,
+      versionKey: false,
+    }
+  );
+  
+  // Evitar duplicados en students antes de guardar
+  CourseSchema.pre("save", function (next) {
+    this.students = [...new Set(this.students.map((s) => s.toString()))];
+    next();
+  });
+  
+  export default model("Course", CourseSchema);
+  
