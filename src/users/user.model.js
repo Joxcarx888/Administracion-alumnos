@@ -32,6 +32,27 @@ const UserSchema = new Schema(
       enum: ["TEACHER_ROLE", "STUDENT_ROLE"],
       default: "STUDENT_ROLE",
     },
+    courses: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
+    coursesCreated: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+        validate: [
+          {
+            validator: function (val) {
+              return val.length <= 3; 
+            },
+            message: "Un estudiante solo puede estar inscrito en un máximo de 3 cursos",
+          },
+        ],
+        
+      },
+    ],
     estado: {
       type: Boolean,
       default: true,
