@@ -1,0 +1,200 @@
+[{
+  "_id": {
+    "$oid": "67b33695ae2f50210e309087"
+  },
+  "name": "Fernando Alonso",
+  "username": "alo",
+  "email": "falonso@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$iAjHPwgHSZCp0hg3FeFEgA$BftHbn2XMHLwighUscXK9mN+NxZU+2r9iw4EsY4w/P0",
+  "role": "STUDENT_ROLE",
+  "courses": [],
+  "coursesCreated": [],
+  "estado": true,
+  "createdAt": {
+    "$date": "2025-02-17T13:16:05.157Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T16:40:10.688Z"
+  },
+  "enrolledCourses": [
+    {
+      "$oid": "67b33781ae2f50210e30909e"
+    },
+    {
+      "$oid": "67b33770ae2f50210e309099"
+    },
+    {
+      "$oid": "67b345aee67e3eeb8235bc98"
+    },
+    {
+      "$oid": "67b345cee67e3eeb8235bca2"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67b336aaae2f50210e30908a"
+  },
+  "name": "Max Verstappen",
+  "username": "M33",
+  "email": "max@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$QG/8PTBnxiQNoilpOsAgEw$U5/4PVe+KFo09C/gOHPLmLq+0/1i4gRJPGcnYdgAnzw",
+  "role": "STUDENT_ROLE",
+  "courses": [],
+  "coursesCreated": [],
+  "estado": true,
+  "createdAt": {
+    "$date": "2025-02-17T13:16:26.553Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T17:00:14.464Z"
+  },
+  "enrolledCourses": [
+    {
+      "$oid": "67b33770ae2f50210e309099"
+    },
+    {
+      "$oid": "67b33781ae2f50210e30909e"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67b336d7ae2f50210e30908e"
+  },
+  "name": "Hatsune Miku",
+  "username": "miku",
+  "email": "miku@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$zTEV2wyV2XC9HmXYahxSJQ$0AxMjvAeym56shP7/VSydHZQu6lHCBliBjaB4bwPzJ4",
+  "role": "TEACHER_ROLE",
+  "courses": [],
+  "coursesCreated": [],
+  "estado": true,
+  "createdAt": {
+    "$date": "2025-02-17T13:17:11.563Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T13:17:11.563Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b336f9ae2f50210e309091"
+  },
+  "name": "Cristiano Ronaldo",
+  "username": "cr7",
+  "email": "cr7@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$HySwy1mE1fCnCsGu+luw7w$dnloAayGY5rUGDZDWOaa6S2mfHi4B5ft057xEd42k2U",
+  "role": "TEACHER_ROLE",
+  "courses": [],
+  "coursesCreated": [],
+  "estado": true,
+  "createdAt": {
+    "$date": "2025-02-17T13:17:45.438Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T13:17:45.438Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b34f06856b2f8f5f9bbf2d"
+  },
+  "name": "Lewis Hamilton Nigg",
+  "username": "lhamilton",
+  "email": "lhamilton@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$baaJ/DimX+uXylVonkHJNA$PsKPWzfk1NkfnppwR2qziPEn4mPopiCq26pH3qymoR4",
+  "role": "STUDENT_ROLE",
+  "courses": [],
+  "enrolledCourses": [],
+  "estado": false,
+  "createdAt": {
+    "$date": "2025-02-17T15:00:22.647Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T15:09:51.715Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b3521f1247631f79e6aac5"
+  },
+  "name": "Lewis Hamilton",
+  "username": "lhamilton2",
+  "email": "lhamilton2@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$GFKtT0ZS7p4QJoptHeDdsg$XiqDq/gkh8kHDUHlpp84bywvrOACpLmNJ0sy5KxXpw8",
+  "role": "STUDENT_ROLE",
+  "courses": [],
+  "enrolledCourses": [
+    {
+      "$oid": "67b345aee67e3eeb8235bc98"
+    },
+    {
+      "$oid": "67b345cee67e3eeb8235bca2"
+    }
+  ],
+  "estado": false,
+  "createdAt": {
+    "$date": "2025-02-17T15:13:35.597Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T15:16:46.956Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b35345d4c2867981649323"
+  },
+  "name": "Lewis Hamilton",
+  "username": "lhamilton3",
+  "email": "lhamilton3@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$Z9uzxzq5gDI9find8mld1g$0Z0bEG0xcT8qOn9icP9rpfipTK5A+gaHNKeXATrw7d4",
+  "role": "STUDENT_ROLE",
+  "courses": [],
+  "enrolledCourses": [],
+  "estado": false,
+  "createdAt": {
+    "$date": "2025-02-17T15:18:29.576Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T15:26:30.570Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b367f915e5935fcc40cbeb"
+  },
+  "name": "Jesus",
+  "username": "jesus",
+  "email": "jesus@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$8kxWJXWZLF/r0gHC/2+lGQ$Lzswu+MHMGi2dO/0vrWYBEp4B7EUMs2pxmIgHKfnDDQ",
+  "role": "TEACHER_ROLE",
+  "courses": [],
+  "enrolledCourses": [],
+  "estado": true,
+  "createdAt": {
+    "$date": "2025-02-17T16:46:49.191Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T16:46:49.191Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b3684415e5935fcc40cbef"
+  },
+  "name": "Jesus",
+  "username": "jesus12",
+  "email": "jesus12@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$r7bkoDVaBBZNzQqnGqtmxw$OfUI4Azxa8iqoesGiqYUdqzJWajPIxLmTmEyJ+M56XU",
+  "role": "STUDENT_ROLE",
+  "courses": [],
+  "enrolledCourses": [],
+  "estado": false,
+  "createdAt": {
+    "$date": "2025-02-17T16:48:04.589Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T16:57:21.979Z"
+  }
+}]

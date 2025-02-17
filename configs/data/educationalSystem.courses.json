@@ -1,0 +1,136 @@
+[{
+  "_id": {
+    "$oid": "67b33770ae2f50210e309099"
+  },
+  "title": "Futbol",
+  "description": "Fulbo tactico",
+  "status": true,
+  "teacher": {
+    "$oid": "67b336f9ae2f50210e309091"
+  },
+  "students": [
+    {
+      "$oid": "67b33695ae2f50210e309087"
+    },
+    {
+      "$oid": "67b336aaae2f50210e30908a"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-02-17T13:19:44.534Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T14:26:48.705Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b33781ae2f50210e30909e"
+  },
+  "title": "Futbol",
+  "description": "Futbol Fisico",
+  "status": true,
+  "teacher": {
+    "$oid": "67b336f9ae2f50210e309091"
+  },
+  "students": [
+    {
+      "$oid": "67b33695ae2f50210e309087"
+    },
+    {
+      "$oid": "67b336aaae2f50210e30908a"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-02-17T13:20:01.420Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T14:26:48.708Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b339fb52f8a33a55183628"
+  },
+  "title": "Musica Electronica",
+  "description": "Electro Vocaloid",
+  "status": false,
+  "teacher": {
+    "$oid": "67b336d7ae2f50210e30908e"
+  },
+  "students": [],
+  "createdAt": {
+    "$date": "2025-02-17T13:30:35.786Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T16:40:10.698Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b345aee67e3eeb8235bc98"
+  },
+  "title": "Mortal Kombat",
+  "description": "Tutotrias Fantasy",
+  "status": true,
+  "teacher": {
+    "$oid": "67b336f9ae2f50210e309091"
+  },
+  "students": [
+    {
+      "$oid": "67b33695ae2f50210e309087"
+    },
+    {
+      "$oid": "67b3521f1247631f79e6aac5"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-02-17T14:20:30.785Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T15:20:45.099Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b345cee67e3eeb8235bca2"
+  },
+  "title": "Mortal Kombat5",
+  "description": "Tutotrias Fantasy",
+  "status": true,
+  "teacher": {
+    "$oid": "67b336f9ae2f50210e309091"
+  },
+  "students": [
+    {
+      "$oid": "67b33695ae2f50210e309087"
+    },
+    {
+      "$oid": "67b3521f1247631f79e6aac5"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-02-17T14:21:02.339Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T15:20:45.102Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b3693d15e5935fcc40cbf8"
+  },
+  "title": "Musica Electronica 2",
+  "description": "Electro Vocaloid",
+  "status": false,
+  "teacher": {
+    "$oid": "67b336d7ae2f50210e30908e"
+  },
+  "students": [],
+  "createdAt": {
+    "$date": "2025-02-17T16:52:13.314Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T16:55:50.518Z"
+  }
+}]

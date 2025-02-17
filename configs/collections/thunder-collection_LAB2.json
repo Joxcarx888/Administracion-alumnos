@@ -1,0 +1,206 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "LAB2",
+    "collectionId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+    "dateExported": "2025-02-17T17:00:41.772Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "35870e6b-ae17-4dca-85b8-f4f3cde34059",
+            "colId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+            "containerId": "",
+            "name": "Agregar profesor",
+            "url": "http://localhost:3333/educationSystem/v1/auth/register/teacher",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2025-02-17T16:44:57.688Z",
+            "modified": "2025-02-17T16:46:49.198Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"name\": \"Jesus\",\r\n  \"username\":\"jesus\",\r\n  \"email\": \"jesus@gmail.com\",\r\n  \"password\": \"12345678\",\r\n  \"role\": \"TEACHER_ROLE\"\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "5b836171-c9fd-4419-9204-fea2e5e5f832",
+            "colId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+            "containerId": "",
+            "name": "Agregar Alumno",
+            "url": "http://localhost:3333/educationSystem/v1/auth/register/student",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2025-02-17T16:47:01.454Z",
+            "modified": "2025-02-17T16:48:04.594Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"name\": \"Jesus\",\r\n  \"username\":\"jesus12\",\r\n  \"email\": \"jesus12@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "42174695-b4ae-488f-a6f3-f7f16cd1607b",
+            "colId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+            "containerId": "",
+            "name": "Login",
+            "url": "http://localhost:3333/educationSystem/v1/auth/login",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2025-02-17T16:48:20.631Z",
+            "modified": "2025-02-17T16:59:05.524Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"email\": \"mverstappen@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "257cd67a-9493-4e2f-bfac-aa842224807c",
+            "colId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+            "containerId": "",
+            "name": "Ver Cursos",
+            "url": "http://localhost:3333/educationSystem/v1/courses/",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2025-02-17T16:49:11.695Z",
+            "modified": "2025-02-17T16:49:58.727Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2IzMzZmOWFlMmY1MDIxMGUzMDkwOTEiLCJpYXQiOjE3Mzk4MTA5ODAsImV4cCI6MTczOTgxNDU4MH0.QEXpiwK-HnpKIA46bD7LiBd9dGfIbLJ1qm48JPeNs_k"
+                }
+            ]
+        },
+        {
+            "_id": "f7e88773-794d-476e-9b40-bc6b55e37845",
+            "colId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+            "containerId": "",
+            "name": "Guardar Curso",
+            "url": "http://localhost:3333/educationSystem/v1/courses/",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2025-02-17T16:50:45.342Z",
+            "modified": "2025-02-17T16:52:13.334Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2IzMzZkN2FlMmY1MDIxMGUzMDkwOGUiLCJpYXQiOjE3Mzk4MTExMTAsImV4cCI6MTczOTgxNDcxMH0.RNWJL8j19_T1b-gOemgfLk1tG31V_h4RrvYYPEG1Hjw"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Musica Electronica\",\n  \"description\": \"Electro Vocaloid\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "b18a59fe-f7c2-495a-8d9d-040304041792",
+            "colId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+            "containerId": "",
+            "name": "Editar Curso",
+            "url": "http://localhost:3333/educationSystem/v1/courses/67b3693d15e5935fcc40cbf8",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2025-02-17T16:53:13.798Z",
+            "modified": "2025-02-17T16:53:50.075Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2IzMzZkN2FlMmY1MDIxMGUzMDkwOGUiLCJpYXQiOjE3Mzk4MTExMTAsImV4cCI6MTczOTgxNDcxMH0.RNWJL8j19_T1b-gOemgfLk1tG31V_h4RrvYYPEG1Hjw"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Musica Electronica 2\",\n  \"description\": \"Electro Vocaloid\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "aeaf6a75-69b1-4ca8-b286-59416d03995d",
+            "colId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+            "containerId": "",
+            "name": "Eliminar Curso",
+            "url": "http://localhost:3333/educationSystem/v1/courses/67b3693d15e5935fcc40cbf8",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2025-02-17T16:54:15.860Z",
+            "modified": "2025-02-17T16:55:50.532Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2IzMzZkN2FlMmY1MDIxMGUzMDkwOGUiLCJpYXQiOjE3Mzk4MTA0MDIsImV4cCI6MTczOTgxNDAwMn0.opl9WGZX-biJsWgJ3FVp-qB95oQIBKngvTyUdOA3K8s"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Musica Electronica\",\n  \"description\": \"Electro Vocaloid\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "78eab07b-1c62-45c6-beb8-fdb2f21abfec",
+            "colId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+            "containerId": "",
+            "name": "Inscribirse a curso",
+            "url": "http://localhost:3333/educationSystem/v1/users/inscribirse",
+            "method": "PUT",
+            "sortNum": 80000,
+            "created": "2025-02-17T16:54:55.900Z",
+            "modified": "2025-02-17T16:55:46.655Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2IzNjg0NDE1ZTU5MzVmY2M0MGNiZWYiLCJpYXQiOjE3Mzk4MTEzMTgsImV4cCI6MTczOTgxNDkxOH0.nALlnD4Kyao-y9YY-2OT6RPd394xkLtCbE6SPC3e1Ak"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"enrolledCourses\": [\n    \"67b3693d15e5935fcc40cbf8\"\n  ]\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "f797d77c-4f1f-4cf7-ae3d-6e25883e4842",
+            "colId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+            "containerId": "",
+            "name": "Eliminar Alumno",
+            "url": "http://localhost:3333/educationSystem/v1/users/eliminar",
+            "method": "DELETE",
+            "sortNum": 90000,
+            "created": "2025-02-17T16:57:06.453Z",
+            "modified": "2025-02-17T16:57:21.991Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2IzNjg0NDE1ZTU5MzVmY2M0MGNiZWYiLCJpYXQiOjE3Mzk4MTEzMTgsImV4cCI6MTczOTgxNDkxOH0.nALlnD4Kyao-y9YY-2OT6RPd394xkLtCbE6SPC3e1Ak"
+                }
+            ]
+        },
+        {
+            "_id": "2940e8ee-5a0f-427f-9010-c9c2317a836c",
+            "colId": "3a4a9bc7-12d5-4954-a696-6cfa8a0f9a6b",
+            "containerId": "",
+            "name": "Editar Alumno",
+            "url": "http://localhost:3333/educationSystem/v1/users/editar",
+            "method": "PUT",
+            "sortNum": 100000,
+            "created": "2025-02-17T16:59:21.849Z",
+            "modified": "2025-02-17T17:00:14.471Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2IzMzZhYWFlMmY1MDIxMGUzMDkwOGEiLCJpYXQiOjE3Mzk4MTE1NDUsImV4cCI6MTczOTgxNTE0NX0.vkB0qNRSuIa-9mTVMBmQ9tDZR0glRXWeqDX8RpCTfG0"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"name\": \"Max Verstappen\",\r\n  \"username\":\"M33\",\r\n  \"email\": \"max@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "cig-9er02ShfKLiehT0MZEzpRGFW0Q7jshHTpqP2I-ukjUOhr5WayhvPjBYUG0TYp7cR9v4uTxJc2aAzes3TEA"
+}

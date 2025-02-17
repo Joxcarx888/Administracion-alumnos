@@ -43,7 +43,7 @@ router.delete(
     deleteCourse
 );
 
-/*router.put(
+router.put(
     "/:id",
     [
         validarJWT, 
@@ -52,27 +52,6 @@ router.delete(
         validarCampos
     ],
     editarCurso
-);*/
-
-router.put(
-    "/:id/inscribirse",
-    [
-        validarJWT, 
-        tieneRole("STUDENT_ROLE"),
-        body("enrolledCourses")
-            .isArray().withMessage("Los cursos deben estar en un array")
-            .custom((courses) => {
-                if (courses.length > 3) {
-                    throw new Error("Un estudiante solo puede registrarse en un máximo de 3 cursos");
-                }
-                return true;
-            })
-            .custom(noCursosDuplicados),
-        check("enrolledCourses.*").custom(noDuplicarCurso),
-        validarCampos
-    ],
-    InscribirAlumnos
 );
-
 
 export default router;

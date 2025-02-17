@@ -70,21 +70,36 @@ export const deleteCourse = async (req, res) => {
                 msg: "No puedes eliminar este curso",
             });
         }
-        
-        const course = await Course.findByIdAndUpdate(id, { status: false }, { new: true });
 
-        if (!course) {
-            return res.status(404).json({
-                success: false,
-                message: "Curso no encontrado"
-            });
+        const students = await User.find({ enrolledCourses: id });
+
+        
+        for (const student of students) {
+            let newEnrolledCourses = [];
+            for (let i = 0; i < student.enrolledCourses.length; i++) {
+                if (student.enrolledCourses[i].toString() !== id) {
+                    newEnrolledCourses[newEnrolledCourses.length] = student.enrolledCourses[i]; 
+                }
+            }
+            
+            await User.updateOne(
+                { _id: student._id },
+                { enrolledCourses: newEnrolledCourses },
+                { runValidators: false } 
+            );
         }
+
+        
+        curso.students = [];
+        curso.status = false; 
+        await curso.save();
 
         res.status(200).json({
             success: true,
-            message: "Curso eliminado exitosamente",
-            course
+            message: "Curso eliminado exitosamente y estudiantes desinscritos",
+            course: curso
         });
+
     } catch (error) {
         console.error("Error al eliminar curso:", error); 
         res.status(500).json({
@@ -94,6 +109,7 @@ export const deleteCourse = async (req, res) => {
         });
     }
 };
+
 
 
 
