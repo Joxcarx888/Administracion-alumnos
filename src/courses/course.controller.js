@@ -1,4 +1,6 @@
 import Course from './course.model.js';
+import User from "../users/user.model.js";
+
 
 export const saveCourse = async (req, res) => {
     try {
@@ -129,7 +131,7 @@ export const editarCurso = async (req, res) => {
 
 export const InscribirAlumnos = async (req, res) => {
     try {
-        const { courses } = req.body; 
+        const { enrolledCourses } = req.body;
         const authenticatedUser = req.usuario; 
 
         if (authenticatedUser.role !== "STUDENT_ROLE") {
@@ -139,15 +141,32 @@ export const InscribirAlumnos = async (req, res) => {
             });
         }
 
-        if (!Array.isArray(courses) || courses.length === 0) {
+        if (!Array.isArray(enrolledCourses) || enrolledCourses.length === 0) {
             return res.status(400).json({
                 success: false,
                 message: "Debes proporcionar un arreglo de IDs de cursos"
             });
         }
 
+        const user = await User.findById(authenticatedUser._id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "Usuario no encontrado"
+            });
+        }
+
+        const totalCursos = user.enrolledCourses.length + enrolledCourses.length;
+        if (totalCursos > 3) {
+            return res.status(400).json({
+                success: false,
+                message: "Un estudiante solo puede estar inscrito en un máximo de 3 cursos",
+            });
+        }
+
+
         const updatedCourses = await Promise.all(
-            courses.map(async (courseId) => {
+            enrolledCourses.map(async (courseId) => { 
                 const curso = await Course.findById(courseId);
 
                 if (!curso) return null;
@@ -164,11 +183,16 @@ export const InscribirAlumnos = async (req, res) => {
             })
         );
 
+        await User.findByIdAndUpdate(authenticatedUser._id, {
+            enrolledCourses: [...user.enrolledCourses, ...enrolledCourses]
+        });
+
         return res.status(200).json({
             success: true,
             msg: "Te has inscrito en los cursos seleccionados",
             courses: updatedCourses.filter(course => course !== null) 
         });
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({
@@ -178,6 +202,8 @@ export const InscribirAlumnos = async (req, res) => {
         });
     }
 };
+
+
 
 
 

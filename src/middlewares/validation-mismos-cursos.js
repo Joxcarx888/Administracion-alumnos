@@ -11,7 +11,7 @@ export const noDuplicarCurso = async (courseId, { req }) => {
             throw new Error("Usuario no encontrado");
         }
 
-        if (user.studentInfo.courses.includes(courseId)) {
+        if (user.enrolledCourses.includes(courseId)) {
             throw new Error("Ya estás inscrito en este curso.");
         }
 
@@ -20,6 +20,7 @@ export const noDuplicarCurso = async (courseId, { req }) => {
         throw new Error(error.message);
     }
 };
+
 
 export const noCursosDuplicados = (courses) => {
     if (!Array.isArray(courses)) {

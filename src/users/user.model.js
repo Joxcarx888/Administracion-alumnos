@@ -38,7 +38,7 @@ const UserSchema = new Schema(
         ref: "Course",
       },
     ],
-    coursesCreated: [
+    enrolledCourses: [ 
       {
         type: Schema.Types.ObjectId,
         ref: "Course",
@@ -50,7 +50,6 @@ const UserSchema = new Schema(
             message: "Un estudiante solo puede estar inscrito en un máximo de 3 cursos",
           },
         ],
-        
       },
     ],
     estado: {

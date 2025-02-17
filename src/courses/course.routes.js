@@ -43,7 +43,7 @@ router.delete(
     deleteCourse
 );
 
-router.put(
+/*router.put(
     "/:id",
     [
         validarJWT, 
@@ -52,14 +52,14 @@ router.put(
         validarCampos
     ],
     editarCurso
-);
+);*/
 
 router.put(
-    "/inscribirse",
+    "/:id/inscribirse",
     [
         validarJWT, 
         tieneRole("STUDENT_ROLE"),
-        body("courses")
+        body("enrolledCourses")
             .isArray().withMessage("Los cursos deben estar en un array")
             .custom((courses) => {
                 if (courses.length > 3) {
@@ -68,10 +68,11 @@ router.put(
                 return true;
             })
             .custom(noCursosDuplicados),
-        check("courses.*").custom(noDuplicarCurso),
+        check("enrolledCourses.*").custom(noDuplicarCurso),
         validarCampos
     ],
     InscribirAlumnos
 );
+
 
 export default router;
