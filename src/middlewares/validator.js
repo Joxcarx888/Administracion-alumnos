@@ -1,6 +1,7 @@
 import { body } from "express-validator";
 import { validarCampos } from "./validar-campos.js";
-import { existenteEmail, esRoleValido } from "../helpers/db-validator.js";
+import { existenteEmail } from "../helpers/db-validator.js";
+import { noCursosDuplicados } from "./validation-mismos-cursos.js";
 
 export const studentRegisterValidator = [
     body("name", "El nombre es obligatorio").not().isEmpty(),
@@ -8,16 +9,18 @@ export const studentRegisterValidator = [
     body("email").custom(existenteEmail),
     body("password", "La contraseña debe tener al menos 8 caracteres").isLength({ min: 8 }),
 
-    body("role").custom((value, { req }) => {
+    body("role").custom((value) => {
         if (value && value !== "STUDENT_ROLE") {
             throw new Error("Los estudiantes solo pueden registrarse con el rol STUDENT_ROLE");
         }
         return true;
     }),
 
-    body("studentInfo.courses").optional().isArray().withMessage("Los cursos deben estar en un array"),
     validarCampos
 ];
+
+
+
 
 export const teacherRegisterValidator = [
     body("name", "El nombre es obligatorio").not().isEmpty(),
@@ -31,8 +34,6 @@ export const teacherRegisterValidator = [
         }
         return true;
     }),
-
-    body("teacherInfo.coursesCreated").optional().isArray().withMessage("Los cursos deben estar en un array"),
     validarCampos
 ];
 
@@ -50,3 +51,17 @@ export const loginValidator = [
     
     validarCampos
 ];
+
+export const AsignacionCursos = [
+    body("")
+        .optional()
+        .isArray()
+        .withMessage("Los cursos deben estar en un array")
+        .custom((courses) => {
+            if (courses.length > 3) {
+                throw new Error("Un estudiante solo puede registrarse en un máximo de 3 cursos");
+            }
+            return true;
+        })
+        .custom(noCursosDuplicados), 
+]

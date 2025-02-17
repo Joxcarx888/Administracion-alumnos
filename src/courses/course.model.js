@@ -38,11 +38,6 @@ const CourseSchema = new Schema(
     }
   );
   
-  // Evitar duplicados en students antes de guardar
-  CourseSchema.pre("save", function (next) {
-    this.students = [...new Set(this.students.map((s) => s.toString()))];
-    next();
-  });
   
   export default model("Course", CourseSchema);
   

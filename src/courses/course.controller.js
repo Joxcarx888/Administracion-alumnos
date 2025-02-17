@@ -1,67 +1,73 @@
-import User from '../users/user.model.js';
 import Course from './course.model.js';
 
 export const saveCourse = async (req, res) => {
     try {
         const data = req.body;
-        const teacher = await User.findOne({ email: data.email });
-        const authenticatedUser = req.user;
+        const authenticatedUser = req.usuario; 
 
-        if (!teacher) {
-            return res.status(404).json({
+        if (!authenticatedUser || authenticatedUser.role !== "TEACHER_ROLE") {
+            return res.status(403).json({
                 success: false,
-                message: 'Maestro no encontrado'
+                message: "No tienes permisos para crear un curso"
             });
         }
 
         const course = new Course({
             ...data,
-            teacher: teacher._id
+            teacher: authenticatedUser._id
         });
 
         await course.save();
 
-        res.status(200).json({
+        res.status(201).json({
             success: true,
-            course,
-            authenticatedUser
+            message: "Curso creado exitosamente",
+            course
         });
     } catch (error) {
+        console.error(error);
         res.status(500).json({
             success: false,
-            message: 'Error al crear curso',
+            message: "Error al crear curso",
             error
         });
     }
 };
 
-export const getCourses = async (req, res) => {
-    const { limite = 10, desde = 0 } = req.query;
-    const query = { status: true };
 
+export const listarCursosProfesor = async (req, res) => {
     try {
-        const courses = await Course.find(query)
-            .skip(Number(desde))
-            .limit(Number(limite));
+        const teacherId = req.usuario._id; 
 
-        const total = await Course.countDocuments(query);
-        res.status(200).json({
+        const cursos = await Course.find({ teacher: teacherId });
+
+        res.json({
             success: true,
-            total,
-            courses
+            cursos,
         });
     } catch (error) {
+        console.error(error);
         res.status(500).json({
             success: false,
-            message: 'Error al obtener cursos',
-            error
+            msg: "Error al obtener los cursos",
         });
     }
 };
+
 
 export const deleteCourse = async (req, res) => {
     try {
         const { id } = req.params;
+        const teacherId = req.usuario._id; 
+
+        const curso = await Course.findOne({ _id: id, teacher: teacherId });
+
+        if (!curso) {
+            return res.status(403).json({
+                success: false,
+                msg: "No puedes eliminar este curso",
+            });
+        }
         
         const course = await Course.findByIdAndUpdate(id, { status: false }, { new: true });
 
@@ -88,52 +94,90 @@ export const deleteCourse = async (req, res) => {
 };
 
 
-export const searchCourse = async (req, res) => {
-    const { id } = req.params;
 
+
+export const editarCurso = async (req, res) => {
     try {
-        const course = await Course.findById(id).populate('teacher', 'name');
+        const { id } = req.params;
+        const teacherId = req.usuario._id; 
 
-        if (!course) {
-            return res.status(404).json({
+        const curso = await Course.findOne({ _id: id, teacher: teacherId });
+
+        if (!curso) {
+            return res.status(403).json({
                 success: false,
-                message: 'Curso no encontrado'
+                msg: "No puedes editar este curso",
             });
         }
 
-        res.status(200).json({
+
+        const cursoActualizado = await Course.findByIdAndUpdate(id, req.body, { new: true });
+
+        res.json({
             success: true,
-            course
+            msg: "Curso actualizado exitosamente",
+            curso: cursoActualizado,
         });
     } catch (error) {
+        console.error(error);
         res.status(500).json({
             success: false,
-            message: 'Error al buscar curso',
-            error
+            msg: "Error al actualizar el curso",
         });
     }
 };
 
-
-export const updateCourse = async (req, res) => {
+export const InscribirAlumnos = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { ...data } = req.body;
-        const authenticatedUser = req.user;
+        const { courses } = req.body; 
+        const authenticatedUser = req.usuario; 
 
-        const course = await Course.findByIdAndUpdate(id, data, { new: true });
+        if (authenticatedUser.role !== "STUDENT_ROLE") {
+            return res.status(403).json({
+                success: false,
+                message: "Esta función solo es para estudiantes"
+            });
+        }
 
-        res.status(200).json({
+        if (!Array.isArray(courses) || courses.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: "Debes proporcionar un arreglo de IDs de cursos"
+            });
+        }
+
+        const updatedCourses = await Promise.all(
+            courses.map(async (courseId) => {
+                const curso = await Course.findById(courseId);
+
+                if (!curso) return null;
+
+                if (!curso.students.includes(authenticatedUser._id)) {
+                    return Course.findByIdAndUpdate(
+                        courseId,
+                        { students: [...curso.students, authenticatedUser._id] },
+                        { new: true }
+                    );
+                }
+
+                return curso;
+            })
+        );
+
+        return res.status(200).json({
             success: true,
-            message: 'Curso actualizado',
-            course,
-            authenticatedUser
+            msg: "Te has inscrito en los cursos seleccionados",
+            courses: updatedCourses.filter(course => course !== null) 
         });
     } catch (error) {
-        res.status(500).json({
+        console.error(error);
+        return res.status(500).json({
             success: false,
-            message: 'Error al actualizar el curso',
+            message: "Error al inscribirte en los cursos",
             error
         });
     }
 };
+
+
+

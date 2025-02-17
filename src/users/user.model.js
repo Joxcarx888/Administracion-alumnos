@@ -32,18 +32,6 @@ const UserSchema = new Schema(
       enum: ["TEACHER_ROLE", "STUDENT_ROLE"],
       default: "STUDENT_ROLE",
     },
-    courses: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Course",
-      },
-    ],
-    coursesCreated: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Course",
-      },
-    ],
     estado: {
       type: Boolean,
       default: true,
@@ -56,7 +44,6 @@ const UserSchema = new Schema(
 );
 
 
-// Ocultar campos sensibles
 UserSchema.methods.toJSON = function () {
   const { __v, password, _id, ...usuario } = this.toObject();
   usuario.uid = _id;

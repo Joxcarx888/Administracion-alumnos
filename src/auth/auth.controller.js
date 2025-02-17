@@ -3,13 +3,14 @@ import Course from '../courses/course.model.js';
 import { hash, verify } from 'argon2';
 import { generarJWT } from '../helpers/generate-jwt.js';
 
+
 export const registerStudent = async (req, res) => {
     try {
         const { name, username, email, password } = req.body;
 
         const encryptedPassword = await hash(password);
 
-        const user = await Usuario.create({
+        const user = new Usuario({
             name,
             username,
             email: email.toLowerCase(),
@@ -17,23 +18,30 @@ export const registerStudent = async (req, res) => {
             role: "STUDENT_ROLE",
         });
 
+        await user.save();
+
         return res.status(201).json({
             message: "Estudiante registrado con éxito",
-            userDetails: { email: user.email }
+            userDetails: {
+                email: user.email,
+            },
         });
 
     } catch (error) {
         console.error(error);
         return res.status(500).json({
             message: "Error al registrar el estudiante",
-            error: error.message
+            error: error.message,
         });
     }
 };
 
+
+
+
 export const registerTeacher = async (req, res) => {
     try {
-        const { name, username, email, password, course } = req.body;
+        const { name, username, email, password } = req.body;
         const encryptedPassword = await hash(password);
 
         const user = await Usuario.create({
@@ -43,18 +51,6 @@ export const registerTeacher = async (req, res) => {
             password: encryptedPassword,
             role: "TEACHER_ROLE",
         });
-
-        if (course?.title && course?.description) {
-            const newCourse = await Course.create({
-                title: course.title,
-                description: course.description,
-                teacher: user._id,
-            });
-
-            await Usuario.findByIdAndUpdate(user._id, {
-                $push: { "teacherInfo.coursesCreated": newCourse._id }
-            });
-        }
 
         return res.status(201).json({
             message: "Profesor registrado con éxito",

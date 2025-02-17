@@ -1,43 +1,42 @@
 import { Router } from "express";
-import { check } from "express-validator";
-import { getCourses, saveCourse, searchCourse, deleteCourse, updateCourse } from "./course.controller.js";
+import { check , body} from "express-validator";
+import { listarCursosProfesor, saveCourse, deleteCourse, editarCurso, InscribirAlumnos } from "./course.controller.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
 import { existeCursoById } from "../helpers/db-validator.js";
 import { tieneRole } from "../middlewares/validar-roles.js";
+import { noDuplicarCurso,noCursosDuplicados } from "../middlewares/validation-mismos-cursos.js";
+
+
 
 const router = Router();
 
 router.post(
     "/",
     [
-        validarJWT,
+        validarJWT, 
         tieneRole("TEACHER_ROLE"),
-        check('email', 'Este no es un correo válido').not().isEmpty(),
         validarCampos
     ],
     saveCourse
 );
 
-router.get("/", getCourses);
 
-router.get(
-    "/:id",
-    [
+router.get("/",
+     [
         validarJWT,
         tieneRole("TEACHER_ROLE"),
-        check("id").custom(existeCursoById),
-        validarCampos
-    ],
-    searchCourse
+      ],
+      listarCursosProfesor
 );
+
+
 
 router.delete(
     "/:id",
     [
         validarJWT, 
         tieneRole("TEACHER_ROLE"), 
-        check("id", "No es un ID válido").isMongoId(),
         check("id").custom(existeCursoById),
         validarCampos
     ],
@@ -48,12 +47,31 @@ router.put(
     "/:id",
     [
         validarJWT, 
-        check("id", "No es un ID válido").isMongoId(),
         tieneRole("TEACHER_ROLE"),
         check("id").custom(existeCursoById),
         validarCampos
     ],
-    updateCourse
+    editarCurso
+);
+
+router.put(
+    "/inscribirse",
+    [
+        validarJWT, 
+        tieneRole("STUDENT_ROLE"),
+        body("courses")
+            .isArray().withMessage("Los cursos deben estar en un array")
+            .custom((courses) => {
+                if (courses.length > 3) {
+                    throw new Error("Un estudiante solo puede registrarse en un máximo de 3 cursos");
+                }
+                return true;
+            })
+            .custom(noCursosDuplicados),
+        check("courses.*").custom(noDuplicarCurso),
+        validarCampos
+    ],
+    InscribirAlumnos
 );
 
 export default router;
